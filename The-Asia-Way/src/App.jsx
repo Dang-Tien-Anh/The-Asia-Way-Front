@@ -7,6 +7,8 @@ import Reservation from "./pages/Reservation";
 import Staff_Login from "./pages/Staff_Login";
 import Home_Customer from "./pages/Home_Customer";
 import Home_Staff from "./pages/Home_Staff";
+import Home_Admin from "./pages/Home_Admin";
+import Admin_Login from "./pages/Admin_Login";
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
             <Route path="/reservation" element={<Reservation />} />
             <Route path="/staff/login" element={<Staff_Login />} />
             <Route path="/staff/home" element={<Home_Staff />} />
+            <Route path="/admin/login" element={<Admin_Login />} />
+            <Route path="/admin/home" element={<Home_Admin />} />
           </Routes>
         </main>
 

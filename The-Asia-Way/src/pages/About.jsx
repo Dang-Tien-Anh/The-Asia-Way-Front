@@ -5,26 +5,19 @@ import { useEffect, useState } from "react";
 
 const useBreakpoint = () => {
     const [w, setW] = useState(window.innerWidth);
-    useEffect(() => {
-        const handler = () => setW(window.innerWidth);
-        window.addEventListener("resize", handler);
-        return () => window.removeEventListener("resize", handler);
-    }, []);
-    return { isMobile: w < 640, isTablet: w < 1024 };
+    useEffect(() => { const h = () => setW(window.innerWidth); window.addEventListener("resize", h); return () => window.removeEventListener("resize", h); }, []);
+    return { isMobile: w < 640 };
 };
 
-const fadeUp = (delay = 0) => ({
-    initial: { opacity: 0, y: 28 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.7, delay },
-});
+const fadeUp = (delay = 0) => ({ initial: { opacity: 0, y: 28 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.7, delay } });
 
 const s = {
     page: {
-        background: "#0D0D0D",
+        background: "#FFFAF5",
         fontFamily: "'DM Sans', sans-serif",
         minHeight: "100vh",
     },
+
     hero: {
         position: "relative",
         height: "65vh",
@@ -46,7 +39,8 @@ const s = {
     heroOverlay: {
         position: "absolute",
         inset: 0,
-        background: "linear-gradient(to bottom, rgba(13,13,0,0.55) 0%, rgba(13,13,13,0.85) 100%)",
+        background:
+            "linear-gradient(to bottom, rgba(28,10,0,0.45) 0%, rgba(28,10,0,0.78) 100%)",
     },
     heroContent: {
         position: "relative",
@@ -56,26 +50,26 @@ const s = {
     },
     heroBadge: {
         display: "inline-block",
-        background: "rgba(220,38,38,0.15)",
-        border: "1px solid rgba(220,38,38,0.4)",
+        background: "rgba(194,65,12,0.2)",
+        border: "1px solid rgba(194,65,12,0.5)",
         borderRadius: "100px",
         padding: "5px 18px",
         fontSize: "11px",
         letterSpacing: "2.5px",
         textTransform: "uppercase",
-        color: "#F87171",
+        color: "#FB923C",
         marginBottom: 18,
     },
     heroTitle: {
         fontFamily: "'Playfair Display', serif",
         fontSize: "clamp(2rem, 6vw, 4rem)",
         fontWeight: 700,
-        color: "#FAFAFA",
+        color: "#FFFAF5",
         lineHeight: 1.1,
         marginBottom: 14,
     },
     heroSub: {
-        color: "rgba(250,250,250,0.55)",
+        color: "rgba(255,250,245,0.65)",
         fontSize: "clamp(13px, 2vw, 16px)",
         fontWeight: 300,
         maxWidth: 480,
@@ -83,11 +77,10 @@ const s = {
         lineHeight: 1.65,
     },
 
-    /* Story */
     storySection: {
         maxWidth: 1100,
         margin: "0 auto",
-        padding: "60px 20px",
+        padding: "72px 20px",
     },
     storyGrid: (isMobile) => ({
         display: "grid",
@@ -112,9 +105,9 @@ const s = {
         position: "absolute",
         bottom: 20,
         left: 20,
-        background: "rgba(13,13,13,0.85)",
+        background: "rgba(28,10,0,0.85)",
         backdropFilter: "blur(8px)",
-        border: "1px solid #2A0000",
+        border: "1px solid #3D1F00",
         borderRadius: 12,
         padding: "12px 18px",
     },
@@ -122,12 +115,12 @@ const s = {
         fontFamily: "'Playfair Display', serif",
         fontSize: "1.6rem",
         fontWeight: 700,
-        color: "#F87171",
+        color: "#FB923C",
         lineHeight: 1,
     },
     storyAccentLabel: {
         fontSize: "10px",
-        color: "#888",
+        color: "#A8896C",
         letterSpacing: "1px",
         textTransform: "uppercase",
         marginTop: 2,
@@ -136,7 +129,7 @@ const s = {
         fontSize: "11px",
         letterSpacing: "2.5px",
         textTransform: "uppercase",
-        color: "#F87171",
+        color: "#C2410C",
         fontWeight: 500,
         marginBottom: 14,
     },
@@ -144,30 +137,29 @@ const s = {
         fontFamily: "'Playfair Display', serif",
         fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
         fontWeight: 700,
-        color: "#FAFAFA",
+        color: "#1C0A00",
         lineHeight: 1.2,
         marginBottom: 20,
     },
     storyDivider: {
         width: 48,
         height: 2,
-        background: "#C00000",
+        background: "#C2410C",
         borderRadius: 2,
         marginBottom: 24,
     },
     storyPara: {
         fontSize: "clamp(13px, 1.5vw, 15px)",
-        color: "#888",
+        color: "#7C6652",
         lineHeight: 1.8,
         marginBottom: 16,
     },
 
-    /* Values */
     values: {
-        background: "#111",
-        borderTop: "1px solid #1E1E1E",
-        borderBottom: "1px solid #1E1E1E",
-        padding: "60px 20px",
+        background: "#FEF3E2",
+        borderTop: "1px solid #E8D5B7",
+        borderBottom: "1px solid #E8D5B7",
+        padding: "72px 20px",
     },
     valuesInner: {
         maxWidth: 1100,
@@ -175,13 +167,13 @@ const s = {
     },
     valuesHeader: {
         textAlign: "center",
-        marginBottom: 40,
+        marginBottom: 48,
     },
     valuesEyebrow: {
         fontSize: "11px",
         letterSpacing: "2.5px",
         textTransform: "uppercase",
-        color: "#F87171",
+        color: "#C2410C",
         fontWeight: 500,
         marginBottom: 10,
     },
@@ -189,7 +181,7 @@ const s = {
         fontFamily: "'Playfair Display', serif",
         fontSize: "clamp(1.4rem, 3vw, 2rem)",
         fontWeight: 700,
-        color: "#FAFAFA",
+        color: "#1C0A00",
     },
     valuesGrid: {
         display: "grid",
@@ -197,16 +189,17 @@ const s = {
         gap: 20,
     },
     valueCard: {
-        background: "#1A1A1A",
-        border: "1px solid #2A0000",
+        background: "#FFFFFF",
+        border: "1px solid #E8D5B7",
         borderRadius: 16,
         padding: "28px 24px",
+        boxShadow: "0 2px 12px rgba(28,10,0,0.04)",
     },
     valueIconWrap: {
         width: 44,
         height: 44,
         borderRadius: 12,
-        background: "rgba(192,0,0,0.12)",
+        background: "#FEF3E2",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -216,19 +209,19 @@ const s = {
         fontFamily: "'Playfair Display', serif",
         fontSize: "1.05rem",
         fontWeight: 600,
-        color: "#FAFAFA",
+        color: "#1C0A00",
         marginBottom: 8,
     },
     valueDesc: {
         fontSize: "13px",
-        color: "#888",
+        color: "#7C6652",
         lineHeight: 1.7,
     },
 
-    /* CTA */
     cta: {
-        padding: "60px 20px",
+        padding: "72px 20px",
         textAlign: "center",
+        background: "#FFFAF5",
     },
     ctaInner: {
         maxWidth: 560,
@@ -238,12 +231,12 @@ const s = {
         fontFamily: "'Playfair Display', serif",
         fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
         fontWeight: 700,
-        color: "#FAFAFA",
+        color: "#1C0A00",
         marginBottom: 14,
     },
     ctaSub: {
         fontSize: "clamp(13px, 1.5vw, 15px)",
-        color: "#888",
+        color: "#7C6652",
         lineHeight: 1.7,
         marginBottom: 32,
     },
@@ -254,10 +247,10 @@ const s = {
         flexDirection: isMobile ? "column" : "row",
         alignItems: "center",
     }),
-    btnRed: {
+    btnFilled: {
         padding: "13px 28px",
-        background: "#C00000",
-        color: "#FAFAFA",
+        background: "#C2410C",
+        color: "#FFFFFF",
         border: "none",
         borderRadius: 10,
         fontSize: "14px",
@@ -272,8 +265,8 @@ const s = {
     btnOutline: {
         padding: "13px 28px",
         background: "transparent",
-        color: "#F87171",
-        border: "1px solid #C00000",
+        color: "#C2410C",
+        border: "1px solid #C2410C",
         borderRadius: 10,
         fontSize: "14px",
         fontWeight: 500,
@@ -286,96 +279,47 @@ const s = {
     },
 };
 
+
 const values = [
-    {
-        icon: Sprout,
-        title: "Fresh, Every Day",
-        desc: "We source our produce daily from local growers. Dough is made each morning, broth simmered overnight — nothing sits on a shelf.",
-    },
-    {
-        icon: Flame,
-        title: "Authentically Asian",
-        desc: "Our recipes haven't been reinvented for western palates. They come from grandmothers, street stalls, and generations of knowing exactly what makes a dish sing.",
-    },
-    {
-        icon: Heart,
-        title: "Made With Care",
-        desc: "Every dumpling is hand-folded. Every noodle is pulled by hand. We do it the slow way because the slow way tastes better.",
-    },
+    { icon: Sprout, title: "Fresh, Every Day", desc: "We source our produce daily from local growers. Dough is made each morning, broth simmered overnight — nothing sits on a shelf." },
+    { icon: Flame, title: "Authentically Asian", desc: "Our recipes haven't been reinvented for western palates. They come from grandmothers, street stalls, and generations of knowing exactly what makes a dish sing." },
+    { icon: Heart, title: "Made With Care", desc: "Every dumpling is hand-folded. Every noodle is pulled by hand. We do it the slow way because the slow way tastes better." },
 ];
 
 export default function About() {
     const { isMobile } = useBreakpoint();
-
     return (
         <div style={s.page}>
-
-            {/* Hero */}
             <section style={s.hero}>
-                <motion.img
-                    src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=80"
-                    alt="Asian Way restaurant"
-                    style={s.heroImg}
-                    initial={{ scale: 1.1 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 1.6 }}
-                />
+                <motion.img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=80" alt="Asian Way" style={s.heroImg} initial={{ scale: 1.1 }} animate={{ scale: 1 }} transition={{ duration: 1.6 }} />
                 <div style={s.heroOverlay} />
                 <div style={s.heroContent}>
                     <motion.div style={s.heroBadge} {...fadeUp(0)}>Our Story</motion.div>
-                    <motion.h1 style={s.heroTitle} {...fadeUp(0.15)}>
-                        Cooking the<br />Asian Way
-                    </motion.h1>
-                    <motion.p style={s.heroSub} {...fadeUp(0.3)}>
-                        Hand-pulled noodles, slow broths, real flavours from the east — served the way they were always meant to be.
-                    </motion.p>
+                    <motion.h1 style={s.heroTitle} {...fadeUp(0.15)}>Cooking the<br />Asian Way</motion.h1>
+                    <motion.p style={s.heroSub} {...fadeUp(0.3)}>Hand-pulled noodles, slow broths, real flavours from the east — served the way they were always meant to be.</motion.p>
                 </div>
             </section>
 
-            {/* Story */}
             <section style={s.storySection}>
                 <div style={s.storyGrid(isMobile)}>
-                    <motion.div
-                        style={s.storyImgWrap}
-                        initial={{ opacity: 0, x: isMobile ? 0 : -30, y: isMobile ? 20 : 0 }}
-                        whileInView={{ opacity: 1, x: 0, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <img
-                            src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=900&q=80"
-                            alt="A steaming bowl of pho"
-                            style={s.storyImg}
-                        />
+                    <motion.div style={s.storyImgWrap} initial={{ opacity: 0, x: isMobile ? 0 : -30, y: isMobile ? 20 : 0 }} whileInView={{ opacity: 1, x: 0, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+                        <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=900&q=80" alt="Pho" style={s.storyImg} />
                         <div style={s.storyImgAccent}>
                             <div style={s.storyAccentNum}>12h</div>
                             <div style={s.storyAccentLabel}>Broth, simmered daily</div>
                         </div>
                     </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, x: isMobile ? 0 : 30, y: isMobile ? 20 : 0 }}
-                        whileInView={{ opacity: 1, x: 0, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                    >
+                    <motion.div initial={{ opacity: 0, x: isMobile ? 0 : 30, y: isMobile ? 20 : 0 }} whileInView={{ opacity: 1, x: 0, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
                         <div style={s.storyEyebrow}>Where it began</div>
                         <h2 style={s.storyTitle}>A bowl is a love letter.</h2>
                         <div style={s.storyDivider} />
-                        <p style={s.storyPara}>
-                            Asian Way started with a single recipe — a broth our grandmother simmered for twelve hours, every Sunday, for a family that always showed up hungry. That bowl taught us something: food made with patience tastes different. It tastes like someone cared.
-                        </p>
-                        <p style={s.storyPara}>
-                            Today, that same patience runs through everything we do. We pull our noodles by hand. We fold every dumpling ourselves. We source our chilies, soy, and aromatics from growers who share our obsession. Nothing is shortcut, nothing is pre-packaged — because a bowl of noodles should feel like coming home, not like a transaction.
-                        </p>
-                        <p style={s.storyPara}>
-                            We're not trying to reinvent Asian cuisine. We're trying to honour it — one bowl at a time.
-                        </p>
+                        <p style={s.storyPara}>Asian Way started with a single recipe — a broth our grandmother simmered for twelve hours, every Sunday, for a family that always showed up hungry. That bowl taught us something: food made with patience tastes different. It tastes like someone cared.</p>
+                        <p style={s.storyPara}>Today, that same patience runs through everything we do. We pull our noodles by hand. We fold every dumpling ourselves. Nothing is shortcut, nothing is pre-packaged — because a bowl of noodles should feel like coming home.</p>
+                        <p style={s.storyPara}>We're not trying to reinvent Asian cuisine. We're trying to honour it — one bowl at a time.</p>
                     </motion.div>
                 </div>
             </section>
 
-            {/* Values */}
             <section style={s.values}>
                 <div style={s.valuesInner}>
                     <div style={s.valuesHeader}>
@@ -384,17 +328,8 @@ export default function About() {
                     </div>
                     <div style={s.valuesGrid}>
                         {values.map(({ icon: Icon, title, desc }, i) => (
-                            <motion.div
-                                key={title}
-                                style={s.valueCard}
-                                initial={{ opacity: 0, y: 24 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1, duration: 0.6 }}
-                            >
-                                <div style={s.valueIconWrap}>
-                                    <Icon size={20} color="#F87171" />
-                                </div>
+                            <motion.div key={title} style={s.valueCard} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.6 }}>
+                                <div style={s.valueIconWrap}><Icon size={20} color="#C2410C" /></div>
                                 <div style={s.valueTitle}>{title}</div>
                                 <div style={s.valueDesc}>{desc}</div>
                             </motion.div>
@@ -403,26 +338,16 @@ export default function About() {
                 </div>
             </section>
 
-            {/* CTA */}
             <section style={s.cta}>
-                <motion.div
-                    style={s.ctaInner}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.7 }}
-                >
+                <motion.div style={s.ctaInner} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
                     <h2 style={s.ctaTitle}>Come hungry.</h2>
-                    <p style={s.ctaSub}>
-                        Reserve a table for a night out, or order online and bring the flavours home. Either way, your bowl is waiting.
-                    </p>
+                    <p style={s.ctaSub}>Reserve a table for a night out, or order online and bring the flavours home. Either way, your bowl is waiting.</p>
                     <div style={s.ctaButtons(isMobile)}>
-                        <Link to="/menu" style={s.btnRed}>View Menu</Link>
+                        <Link to="/menu" style={s.btnFilled}>View Menu</Link>
                         <Link to="/contact" style={s.btnOutline}>Reserve a Table</Link>
                     </div>
                 </motion.div>
             </section>
-
         </div>
     );
 }

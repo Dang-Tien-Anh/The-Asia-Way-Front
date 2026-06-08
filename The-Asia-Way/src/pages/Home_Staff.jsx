@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCart } from "../store/cart.store";
 import { ORDER_ITEM_STATUS, ORDER_STATUS_COLORS, TABLE_STATUS, TABLE_STATUS_COLORS } from "../store/status";
+import { useMenuStore, CATEGORIES } from "../store/menu.store";
 
 const STATUS_STYLE = {
     secondary: { background: "#F5F0E8", color: "#7C6652" },
@@ -20,8 +21,6 @@ const s = {
         minHeight: "100vh",
         fontFamily: "'DM Sans', sans-serif",
         padding: "88px 20px 60px",
-        marginTop: -64,
-        paddingTop: 64,
     },
 
     inner: {
@@ -288,6 +287,7 @@ const ItemRow = ({ order, idx, item, onUpdate, isKitchen }) => {
 
 const Home_Staff = () => {
     const { orders, updateOrderStatus } = useCart();
+    const { items: menuItems, toggleAvailability } = useMenuStore();
     const [showModal, setShowModal] = useState(false);
     const [selectedTable, setSelectedTable] = useState(null);
     const [tableStatuses, setTableStatuses] = useState(
@@ -348,6 +348,33 @@ const Home_Staff = () => {
                         );
                     })}
                 </div>
+
+                <div style={s.sectionDivider} />
+
+                {/* ── Menu Availability ── */}
+                <div style={s.sectionTitle}><span style={s.sectionDot("#92400E")} /> Menu Availability</div>
+                <p style={{ fontSize: "13px", color: "#A8896C", marginBottom: 20 }}>Toggle items on/off — unavailable items will be greyed out on the customer menu.</p>
+                {CATEGORIES.map(cat => {
+                    const catItems = menuItems.filter(i => i.category === cat);
+                    return (
+                        <div key={cat} style={{ marginBottom: 28 }}>
+                            <div style={{ fontSize: "12px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#7C6652", fontWeight: 600, marginBottom: 12 }}>{cat}</div>
+                            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 10 }}>
+                                {catItems.map(item => (
+                                    <div key={item.id} style={{ background: item.available ? "#FFFFFF" : "#F5F0E8", border: `1px solid ${item.available ? "#E8D5B7" : "#D1C4B0"}`, borderRadius: 10, padding: "12px 14px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+                                        <div>
+                                            <div style={{ fontSize: "13px", fontWeight: 500, color: item.available ? "#1C0A00" : "#A8896C" }}>{item.name}</div>
+                                            <div style={{ fontSize: "11px", color: "#A8896C", marginTop: 1 }}>${item.price} · {item.type}</div>
+                                        </div>
+                                        <div onClick={() => toggleAvailability(item.id)} style={{ width: 40, height: 22, borderRadius: 100, background: item.available ? "#C2410C" : "#D1C4B0", position: "relative", cursor: "pointer", transition: "background 0.2s", flexShrink: 0 }}>
+                                            <div style={{ position: "absolute", top: 3, left: item.available ? 21 : 3, width: 16, height: 16, borderRadius: "50%", background: "#FFFFFF", transition: "left 0.2s", boxShadow: "0 1px 3px rgba(0,0,0,0.2)" }} />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
 
             {showModal && (

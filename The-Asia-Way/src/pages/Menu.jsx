@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Offcanvas } from "react-bootstrap";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "../store/cart.store";
+import { useMenuStore, CATEGORIES } from "../store/menu.store";
 
 const fontLink = document.createElement("link");
 fontLink.rel = "stylesheet";
@@ -16,8 +17,7 @@ const styles = {
     },
 
     hero: {
-        background:
-            "linear-gradient(135deg, #1C0A00 0%, #3D1500 55%, #7C2D00 100%)",
+        background: "linear-gradient(135deg, #1C0A00 0%, #3D1500 55%, #7C2D00 100%)",
         padding: "72px 0 56px",
         textAlign: "center",
         position: "relative",
@@ -354,193 +354,8 @@ const styles = {
     },
 };
 
-
 const categoryEmoji = { Appetizers: "🥟", "Main Course": "🍽️", Dessert: "🍮", Drinks: "🍵" };
 
-const menuItems = {
-    Appetizers: [
-        {
-            id: 1,
-            name: "Spring Rolls",
-            type: "KITCHEN",
-            price: 5,
-            description: "Crispy rolls with veggies.",
-            image: "https://www.thespruceeats.com/thmb/2mFzYpZp6zvQkzF7VjKkPZkzF7o=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/spring-rolls-4691110-hero-01-5c1b2c7a46e0fb0001f7f6f2.jpg",
-            categoryId: 1,
-        },
-        {
-            id: 2,
-            name: "Garlic Bread",
-            type: "KITCHEN",
-            price: 4,
-            description: "Toasted bread with garlic butter.",
-            image: "https://www.simplyrecipes.com/thmb/6gkZrV6QkzF7VjKkPZkzF7o=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/garlic-bread-hero-01-5c1b2c7a46e0fb0001f7f6f2.jpg",
-            categoryId: 1,
-        },
-        {
-            id: 3,
-            name: "Edamame",
-            type: "INSTANT",
-            price: 3,
-            description: "Steamed soybeans with sea salt.",
-            image: "https://www.justonecookbook.com/wp-content/uploads/2021/07/Edamame-Recipe-500x500.jpg",
-            categoryId: 1,
-        },
-        {
-            id: 4,
-            name: "Chicken Satay",
-            type: "KITCHEN",
-            price: 6,
-            description: "Grilled skewers with peanut sauce.",
-            image: "https://www.recipetineats.com/wp-content/uploads/2019/06/Chicken-Satay_9.jpg",
-            categoryId: 1,
-        },
-    ],
-
-    "Main Course": [
-        {
-            id: 5,
-            name: "Grilled Chicken",
-            type: "KITCHEN",
-            price: 12,
-            description: "Served with herbs and lemon.",
-            image: "https://www.recipetineats.com/wp-content/uploads/2019/06/Grilled-Chicken-Breast_9.jpg",
-            categoryId: 2,
-        },
-        {
-            id: 6,
-            name: "Beef Steak",
-            type: "KITCHEN",
-            price: 18,
-            description: "Juicy steak with pepper sauce.",
-            image: "https://www.recipetineats.com/wp-content/uploads/2019/06/Steak-with-Peppercorn-Sauce_9.jpg",
-            categoryId: 2,
-        },
-        {
-            id: 7,
-            name: "Pho Noodle Soup",
-            type: "KITCHEN",
-            price: 10,
-            description: "Vietnamese beef broth with rice noodles.",
-            image: "https://www.seriouseats.com/thmb/pho-noodle-soup.jpg",
-            categoryId: 2,
-        },
-        {
-            id: 8,
-            name: "Pad Thai",
-            type: "KITCHEN",
-            price: 11,
-            description: "Thai stir-fried noodles with shrimp.",
-            image: "https://www.recipetineats.com/wp-content/uploads/2018/06/Pad-Thai_9.jpg",
-            categoryId: 2,
-        },
-        {
-            id: 9,
-            name: "Kung Pao Chicken",
-            type: "KITCHEN",
-            price: 13,
-            description: "Spicy Sichuan stir-fry with peanuts.",
-            image: "https://www.recipetineats.com/wp-content/uploads/2019/06/Kung-Pao-Chicken_9.jpg",
-            categoryId: 2,
-        },
-    ],
-
-    Dessert: [
-        {
-            id: 10,
-            name: "Chocolate Cake",
-            type: "INSTANT",
-            price: 6,
-            description: "Rich and moist with ganache.",
-            image: "https://www.sallysbakingaddiction.com/wp-content/uploads/2017/02/chocolate-cake.jpg",
-            categoryId: 3,
-        },
-        {
-            id: 11,
-            name: "Ice Cream Sundae",
-            type: "INSTANT",
-            price: 5,
-            description: "Vanilla ice cream with toppings.",
-            image: "https://www.thespruceeats.com/thmb/ice-cream-sundae.jpg",
-            categoryId: 3,
-        },
-        {
-            id: 12,
-            name: "Mango Sticky Rice",
-            type: "INSTANT",
-            price: 7,
-            description: "Sweet Thai dessert with coconut milk.",
-            image: "https://hot-thai-kitchen.com/wp-content/uploads/2019/07/mango-sticky-rice.jpg",
-            categoryId: 3,
-        },
-        {
-            id: 13,
-            name: "Matcha Cheesecake",
-            type: "INSTANT",
-            price: 8,
-            description: "Japanese green tea infused cheesecake.",
-            image: "https://www.justonecookbook.com/wp-content/uploads/2020/07/Matcha-Cheesecake-500x500.jpg",
-            categoryId: 3,
-        },
-    ],
-
-    Drinks: [
-        {
-            id: 14,
-            name: "C2",
-            type: "INSTANT",
-            price: 12,
-            description: "Cold drink",
-            image: "https://cf.shopee.vn/file/3f3c2c2c2c2c2c2c2c2c2c2c2c2c2c2c",
-            categoryId: 4,
-        },
-        {
-            id: 15,
-            name: "Fresh Lemonade",
-            type: "INSTANT",
-            price: 3,
-            description: "Cool and refreshing citrus drink.",
-            image: "https://www.simplyrecipes.com/thmb/lemonade.jpg",
-            categoryId: 4,
-        },
-        {
-            id: 16,
-            name: "Iced Coffee",
-            type: "INSTANT",
-            price: 4,
-            description: "Strong coffee served cold.",
-            image: "https://www.acouplecooks.com/wp-content/uploads/2021/07/Iced-Coffee-009.jpg",
-            categoryId: 4,
-        },
-        {
-            id: 17,
-            name: "Bubble Tea",
-            type: "INSTANT",
-            price: 5,
-            description: "Milk tea with chewy tapioca pearls.",
-            image: "https://www.thespruceeats.com/thmb/bubble-tea.jpg",
-            categoryId: 4,
-        },
-        {
-            id: 18,
-            name: "Green Tea",
-            type: "INSTANT",
-            price: 2,
-            description: "Hot or iced, earthy and soothing.",
-            image: "https://www.thespruceeats.com/thmb/green-tea.jpg",
-            categoryId: 4,
-        },
-        {
-            id: 19,
-            name: "Craft Beer",
-            type: "INSTANT",
-            price: 6,
-            description: "Locally brewed, crisp and refreshing.",
-            image: "https://www.thespruceeats.com/thmb/craft-beer.jpg",
-            categoryId: 4,
-        },
-    ],
-};
 
 
 const MenuCard = ({ item, onOrder }) => {
@@ -548,23 +363,47 @@ const MenuCard = ({ item, onOrder }) => {
     const [added, setAdded] = useState(false);
     const [imgErr, setImgErr] = useState(false);
 
-    const handleOrder = () => { onOrder(item); setAdded(true); setTimeout(() => setAdded(false), 1400); };
+    const handleOrder = () => {
+        if (!item.available) return;
+        onOrder(item); setAdded(true); setTimeout(() => setAdded(false), 1400);
+    };
 
     return (
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.32 }}
-            style={{ ...styles.card, boxShadow: hovered ? "0 12px 36px rgba(28,10,0,0.10)" : "0 2px 8px rgba(28,10,0,0.04)", transform: hovered ? "translateY(-4px)" : "translateY(0)" }}
+            style={{
+                ...styles.card,
+                boxShadow: hovered && item.available ? "0 12px 36px rgba(28,10,0,0.10)" : "0 2px 8px rgba(28,10,0,0.04)",
+                transform: hovered && item.available ? "translateY(-4px)" : "translateY(0)",
+                opacity: item.available ? 1 : 0.7,
+            }}
             onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-            {imgErr
-                ? <div style={styles.cardImgPlaceholder}>{categoryEmoji[item.category] || "🍴"}</div>
-                : <img src={`/images/${item.image}`} alt={item.name} style={styles.cardImg} onError={() => setImgErr(true)} />}
+
+            {/* Image with unavailable overlay */}
+            <div style={{ position: "relative" }}>
+                {imgErr
+                    ? <div style={styles.cardImgPlaceholder}>{categoryEmoji[item.category] || "🍴"}</div>
+                    : <img src={item.image} alt={item.name} style={{ ...styles.cardImg, filter: item.available ? "none" : "grayscale(60%)" }} onError={() => setImgErr(true)} />}
+                {!item.available && (
+                    <div style={{ position: "absolute", inset: 0, background: "rgba(255,250,245,0.55)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <span style={{ background: "#7C6652", color: "#FFFAF5", fontSize: "11px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", padding: "5px 14px", borderRadius: "100px" }}>
+                            Unavailable
+                        </span>
+                    </div>
+                )}
+            </div>
+
             <div style={styles.cardBody}>
                 <span style={styles.cardTag(item.type)}>{item.type === "INSTANT" ? "Ready instantly" : "Kitchen order"}</span>
                 <div style={styles.cardName}>{item.name}</div>
                 <div style={styles.cardDesc}>{item.description}</div>
                 <div style={styles.cardFooter}>
                     <span style={styles.cardPrice}>${item.price}</span>
-                    <motion.button style={{ ...styles.orderBtn, background: added ? "#166534" : "#C2410C" }} whileTap={{ scale: 0.95 }} onClick={handleOrder}>
-                        {added ? "✓ Added" : "+ Order"}
+                    <motion.button
+                        style={{ ...styles.orderBtn, background: !item.available ? "#D1C4B0" : added ? "#166534" : "#C2410C", cursor: item.available ? "pointer" : "not-allowed" }}
+                        whileTap={item.available ? { scale: 0.95 } : {}}
+                        onClick={handleOrder}
+                    >
+                        {!item.available ? "Unavailable" : added ? "✓ Added" : "+ Order"}
                     </motion.button>
                 </div>
             </div>
@@ -576,6 +415,7 @@ const Menu = () => {
     const [selectedCategory, setSelectedCategory] = useState("Appetizers");
     const [showCart, setShowCart] = useState(false);
     const { cart, addItem, removeItem, clearCart, totalPrice, placeOrder, customerTable, orders } = useCart();
+    const getByCategory = useMenuStore((s) => s.getByCategory);
 
     // Only show orders for this table
     const myOrders = orders.filter(o => String(o.customer?.table) === String(customerTable));
@@ -606,7 +446,7 @@ const Menu = () => {
 
             <div style={styles.stickyNav}>
                 <div style={styles.navInner}>
-                    {Object.keys(menuItems).map((cat) => (
+                    {CATEGORIES.map((cat) => (
                         <button key={cat} style={styles.navBtn(selectedCategory === cat)} onClick={() => setSelectedCategory(cat)}>
                             {categoryEmoji[cat]} {cat}
                         </button>
@@ -620,7 +460,7 @@ const Menu = () => {
                 <AnimatePresence mode="wait">
                     <motion.div key={selectedCategory} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
                         <Row className="g-4">
-                            {menuItems[selectedCategory].map((item, i) => (
+                            {getByCategory(selectedCategory).map((item, i) => (
                                 <Col md={6} lg={4} key={item.id}>
                                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06, duration: 0.3 }} style={{ height: "100%" }}>
                                         <MenuCard item={{ ...item, category: selectedCategory }} onOrder={addItem} />

@@ -6,83 +6,211 @@ import { Menu, X } from "lucide-react";
 const s = {
   header: {
     position: "fixed",
-    top: 0, left: 0, right: 0,
+    top: 0,
+    left: 0,
+    right: 0,
     zIndex: 1000,
     background: "rgba(255,250,245,0.96)",
     backdropFilter: "blur(14px)",
     borderBottom: "1px solid #E8D5B7",
     fontFamily: "'DM Sans', sans-serif",
   },
+
   inner: {
-    maxWidth: 1100, margin: "0 auto", padding: "0 24px",
-    display: "flex", alignItems: "center", justifyContent: "space-between", height: 64,
+    maxWidth: 1100,
+    margin: "0 auto",
+    padding: "0 24px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: 64,
   },
-  logoLink: { display: "flex", alignItems: "center", gap: 10, textDecoration: "none" },
-  logoEmoji: { fontSize: "1.5rem" },
+
+  logoLink: {
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+    textDecoration: "none",
+  },
+
+  logoEmoji: {
+    fontSize: "1.5rem",
+  },
+
   logoText: {
     fontFamily: "'Playfair Display', serif",
-    fontSize: "1.05rem", fontWeight: 700,
-    color: "#1C0A00", textTransform: "uppercase", letterSpacing: "1px",
+    fontSize: "1.05rem",
+    fontWeight: 700,
+    color: "#1C0A00",
+    textTransform: "uppercase",
+    letterSpacing: "1px",
   },
-  logoAccent: { color: "#C2410C" },
-  navLinks: { display: "flex", alignItems: "center", gap: 4, listStyle: "none", margin: 0, padding: 0 },
+
+  logoAccent: {
+    color: "#C2410C",
+  },
+
+  navLinks: {
+    display: "flex",
+    alignItems: "center",
+    gap: 4,
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
+  },
+
   navLink: (active) => ({
-    display: "block", padding: "6px 14px", fontSize: "14px",
+    display: "block",
+    padding: "6px 14px",
+    fontSize: "14px",
     color: active ? "#C2410C" : "#7C6652",
-    textDecoration: "none", borderRadius: 8,
+    textDecoration: "none",
+    borderRadius: 8,
     background: active ? "#FEF3E2" : "transparent",
-    transition: "all 0.18s", fontWeight: active ? 500 : 400,
+    transition: "all 0.18s",
+    fontWeight: active ? 500 : 400,
   }),
-  actions: { display: "flex", alignItems: "center", gap: 8 },
+
+  actions: {
+    display: "flex",
+    alignItems: "center",
+    gap: 8,
+  },
+
   btnOutline: {
-    padding: "7px 16px", fontSize: "13px", fontWeight: 500, borderRadius: 8,
-    border: "1px solid #C2410C", background: "transparent", color: "#C2410C",
-    cursor: "pointer", fontFamily: "'DM Sans', sans-serif", textDecoration: "none",
-    transition: "all 0.18s", whiteSpace: "nowrap",
+    padding: "7px 16px",
+    fontSize: "13px",
+    fontWeight: 500,
+    borderRadius: 8,
+    border: "1px solid #C2410C",
+    background: "transparent",
+    color: "#C2410C",
+    cursor: "pointer",
+    fontFamily: "'DM Sans', sans-serif",
+    textDecoration: "none",
+    transition: "all 0.18s",
+    whiteSpace: "nowrap",
   },
+
   btnFilled: {
-    padding: "7px 16px", fontSize: "13px", fontWeight: 500, borderRadius: 8,
-    border: "none", background: "#C2410C", color: "#FFFFFF",
-    cursor: "pointer", fontFamily: "'DM Sans', sans-serif", textDecoration: "none",
-    transition: "all 0.18s", whiteSpace: "nowrap",
+    padding: "7px 16px",
+    fontSize: "13px",
+    fontWeight: 500,
+    borderRadius: 8,
+    border: "none",
+    background: "#C2410C",
+    color: "#FFFFFF",
+    cursor: "pointer",
+    fontFamily: "'DM Sans', sans-serif",
+    textDecoration: "none",
+    transition: "all 0.18s",
+    whiteSpace: "nowrap",
   },
+
   btnGhost: {
-    padding: "7px 14px", fontSize: "13px", fontWeight: 400, borderRadius: 8,
-    border: "1px solid #E8D5B7", background: "transparent", color: "#A8896C",
-    cursor: "pointer", fontFamily: "'DM Sans', sans-serif", textDecoration: "none",
-    transition: "all 0.18s", whiteSpace: "nowrap",
+    padding: "7px 14px",
+    fontSize: "13px",
+    fontWeight: 400,
+    borderRadius: 8,
+    border: "1px solid #E8D5B7",
+    background: "transparent",
+    color: "#A8896C",
+    cursor: "pointer",
+    fontFamily: "'DM Sans', sans-serif",
+    textDecoration: "none",
+    transition: "all 0.18s",
+    whiteSpace: "nowrap",
   },
-  divider: { width: 1, height: 20, background: "#E8D5B7", margin: "0 4px" },
+
+  divider: {
+    width: 1,
+    height: 20,
+    background: "#E8D5B7",
+    margin: "0 4px",
+  },
+
   hamburger: {
-    background: "transparent", border: "1px solid #E8D5B7", borderRadius: 8,
-    color: "#A8896C", display: "flex", alignItems: "center", justifyContent: "center",
-    width: 38, height: 38, cursor: "pointer",
+    background: "transparent",
+    border: "1px solid #E8D5B7",
+    borderRadius: 8,
+    color: "#A8896C",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 38,
+    height: 38,
+    cursor: "pointer",
   },
+
   mobileMenu: (open) => ({
-    background: "#FFFAF5", borderTop: "1px solid #E8D5B7",
-    overflow: "hidden", maxHeight: open ? 400 : 0, transition: "max-height 0.3s ease",
+    background: "#FFFAF5",
+    borderTop: "1px solid #E8D5B7",
+    overflow: "hidden",
+    maxHeight: open ? 400 : 0,
+    transition: "max-height 0.3s ease",
   }),
+
   mobileInner: {
-    maxWidth: 1100, margin: "0 auto", padding: "16px 24px 24px",
-    display: "flex", flexDirection: "column", gap: 4,
+    maxWidth: 1100,
+    margin: "0 auto",
+    padding: "16px 24px 24px",
+    display: "flex",
+    flexDirection: "column",
+    gap: 4,
   },
+
   mobileLink: (active) => ({
-    display: "block", padding: "10px 14px", fontSize: "15px",
-    color: active ? "#C2410C" : "#7C6652", textDecoration: "none", borderRadius: 8,
-    background: active ? "#FEF3E2" : "transparent", fontWeight: active ? 500 : 400,
-    borderLeft: active ? "2px solid #C2410C" : "2px solid transparent", transition: "all 0.18s",
+    display: "block",
+    padding: "10px 14px",
+    fontSize: "15px",
+    color: active ? "#C2410C" : "#7C6652",
+    textDecoration: "none",
+    borderRadius: 8,
+    background: active ? "#FEF3E2" : "transparent",
+    fontWeight: active ? 500 : 400,
+    borderLeft: active ? "2px solid #C2410C" : "2px solid transparent",
+    transition: "all 0.18s",
   }),
-  mobileDivider: { height: 1, background: "#E8D5B7", margin: "8px 0" },
-  mobileActions: { display: "flex", flexDirection: "column", gap: 8, marginTop: 4 },
+
+  mobileDivider: {
+    height: 1,
+    background: "#E8D5B7",
+    margin: "8px 0",
+  },
+
+  mobileActions: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 8,
+    marginTop: 4,
+  },
+
   mobileBtn: (variant) => ({
-    padding: "11px 16px", fontSize: "14px", fontWeight: 500, borderRadius: 8,
-    border: variant === "filled" ? "none" : variant === "outline" ? "1px solid #C2410C" : "1px solid #E8D5B7",
+    padding: "11px 16px",
+    fontSize: "14px",
+    fontWeight: 500,
+    borderRadius: 8,
+    border:
+      variant === "filled"
+        ? "none"
+        : variant === "outline"
+          ? "1px solid #C2410C"
+          : "1px solid #E8D5B7",
     background: variant === "filled" ? "#C2410C" : "transparent",
-    color: variant === "filled" ? "#FFFFFF" : variant === "outline" ? "#C2410C" : "#A8896C",
-    cursor: "pointer", fontFamily: "'DM Sans', sans-serif", textDecoration: "none",
-    textAlign: "center", display: "block",
+    color:
+      variant === "filled"
+        ? "#FFFFFF"
+        : variant === "outline"
+          ? "#C2410C"
+          : "#A8896C",
+    cursor: "pointer",
+    fontFamily: "'DM Sans', sans-serif",
+    textDecoration: "none",
+    textAlign: "center",
+    display: "block",
   }),
 };
+
 
 const navItems = [
   { to: "/about", label: "About" },
